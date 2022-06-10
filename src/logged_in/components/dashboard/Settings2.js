@@ -184,7 +184,7 @@ function Settings2(props) {
           onChange={handleCheckboxChange("option3")}
         />
       ),
-      helpText: "You can add some further explanation here.",
+      helpText: "You can adfd some further explanation here.",
     },
     {
       title: "Option 4",
