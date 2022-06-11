@@ -44,7 +44,7 @@
          
          <div class="col-md-5">
             
-            <h6 class="section-secondary-title">Personal Details :</h6>        
+            <label class="section-secondary-title">Personal Details :</label>        
             
             <div class="form-group">
                <input class="form-control" type="text" placeholder="First Name" >
@@ -58,12 +58,21 @@
                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Email address">
             </div>
             
-            <h6 class="section-secondary-title">Date of Birth :</h6>        
+            <label class="section-secondary-title">Date of Birth :</label>        
 
             <div class="form-group">
                <input type="date" class="form-control" id="exampleFormControlInput1" placeholder="Date">
             </div>
-            <label for="country">Country</label><span style="color: red !important; display: inline; float: none;">*</span>      
+
+            <div class="form-group">
+               <select class="form-control" id="exampleFormControlSelect1">
+                  <option>Gender</option>
+                  <option>Male</option>
+                  <option>Female</option>
+               </select>
+            </div>
+
+            <label class="section-secondary-title" for="country">Country</label><span style="color: red !important; display: inline; float: none;">*</span>      
         
             <select id="country" name="country" class="form-control">
                 <option value="Afghanistan">Afghanistan</option>
@@ -312,7 +321,7 @@
                 <option value="Zimbabwe">Zimbabwe</option>
             </select>
 
-            <label for="country">Nationality</label><span style="color: red !important; display: inline; float: none;">*</span>      
+            <label for="country" class="section-secondary-title">Nationality</label><span style="color: red !important; display: inline; float: none;">*</span>      
             <select id="country" name="country" class="form-control">
                <option value="Afghanistan">Afghanistan</option>
                <option value="Åland Islands">Åland Islands</option>
