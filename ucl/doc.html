@@ -87,38 +87,34 @@
           <p>Malis percipitur an pro. Pro aperiam persequeris at, at sonet sensibus mei, id mea postulant definiebas concludaturque. Id qui malis abhorreant, mazim melius quo et. At eam altera dolorum, case dicant lobortis ius te, ad vel affert oportere reprehendunt. Quo no verterem deseruisse, mea brute postea te, ne per tacimates suavitate vituperatoribus.</p>
           <p>Malis percipitur an pro. Pro aperiam persequeris at, at sonet sensibus mei, id mea postulant definiebas concludaturque. Id qui malis abhorreant, mazim melius quo et. At eam altera dolorum, case dicant lobortis ius te, ad vel affert oportere reprehendunt. Quo no verterem deseruisse, mea brute postea te, ne per tacimates suavitate vituperatoribus.</p>
           
-          <div class="code__block code__block--notabs">
-            <pre class="code code--block">
-              <code>
-                def read_data(P_Id=None,ws = None,r=None):
-                """
-                This method takes patient ids widow size of transitions and recording number
-                """
-                progress = progressbar.ProgressBar()
-            
-                R1=[] 
-                for pid in progress(P_Id):
-                    df = pd.read_csv(f"../data/Patient-{pid}/Sensor-731_{r}.csv")
-                    df2 = pd.read_csv(f"../data/Patient-{pid}/Sensor-749_{r}.csv")
-                        #for val in df2.columns:
-            
-                    df = df.join(df2,rsuffix='_right')
-                    #print(df.head())
-                    #df = pd.read_csv(f"../nbs/Patient-{pid}/Sensor-731_1.csv")
-                    df2 = pd.read_csv(f"../data/Patient-{pid}-label/label_rec_{r}.csv")
-                    df = df.join(df2)
-                    
-                    tr=df.loc[df[list(df.columns)[-1]] == 1].index
-                    # 30 seconds of transition  Lie Flat and sit ups--- Head movements
-                    p=0
-                    for k in range(0,len(tr),5):
-                        j = tr[k]
-                        df.loc[j-ws:j+ws,'# trans_label']=1
-                    R1.append(df)
-                return R1
-              </code>
-            </pre>
-          </div>
+          <div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">read_data</span>(P_Id<span style="color: #333333">=</span><span style="color: #007020">None</span>,ws <span style="color: #333333">=</span> <span style="color: #007020">None</span>,r<span style="color: #333333">=</span><span style="color: #007020">None</span>):
+            <span style="color: #DD4422">&quot;&quot;&quot;</span>
+        <span style="color: #DD4422">    This method takes patient ids widow size of transitions and recording number</span>
+        <span style="color: #DD4422">    &quot;&quot;&quot;</span>
+            progress <span style="color: #333333">=</span> progressbar<span style="color: #333333">.</span>ProgressBar()
+        
+            R1<span style="color: #333333">=</span>[] 
+            <span style="color: #008800; font-weight: bold">for</span> pid <span style="color: #000000; font-weight: bold">in</span> progress(P_Id):
+                df <span style="color: #333333">=</span> pd<span style="color: #333333">.</span>read_csv(f<span style="background-color: #fff0f0">&quot;../data/Patient-{pid}/Sensor-731_{r}.csv&quot;</span>)
+                df2 <span style="color: #333333">=</span> pd<span style="color: #333333">.</span>read_csv(f<span style="background-color: #fff0f0">&quot;../data/Patient-{pid}/Sensor-749_{r}.csv&quot;</span>)
+                    <span style="color: #888888">#for val in df2.columns:</span>
+        
+                df <span style="color: #333333">=</span> df<span style="color: #333333">.</span>join(df2,rsuffix<span style="color: #333333">=</span><span style="background-color: #fff0f0">&#39;_right&#39;</span>)
+                <span style="color: #888888">#print(df.head())</span>
+                <span style="color: #888888">#df = pd.read_csv(f&quot;../nbs/Patient-{pid}/Sensor-731_1.csv&quot;)</span>
+                df2 <span style="color: #333333">=</span> pd<span style="color: #333333">.</span>read_csv(f<span style="background-color: #fff0f0">&quot;../data/Patient-{pid}-label/label_rec_{r}.csv&quot;</span>)
+                df <span style="color: #333333">=</span> df<span style="color: #333333">.</span>join(df2)
+                
+                tr<span style="color: #333333">=</span>df<span style="color: #333333">.</span>loc[df[<span style="color: #007020">list</span>(df<span style="color: #333333">.</span>columns)[<span style="color: #333333">-</span><span style="color: #0000DD; font-weight: bold">1</span>]] <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">1</span>]<span style="color: #333333">.</span>index
+                <span style="color: #888888"># 30 seconds of transition  Lie Flat and sit ups--- Head movements</span>
+                p<span style="color: #333333">=</span><span style="color: #0000DD; font-weight: bold">0</span>
+                <span style="color: #008800; font-weight: bold">for</span> k <span style="color: #000000; font-weight: bold">in</span> <span style="color: #007020">range</span>(<span style="color: #0000DD; font-weight: bold">0</span>,<span style="color: #007020">len</span>(tr),<span style="color: #0000DD; font-weight: bold">5</span>):
+                    j <span style="color: #333333">=</span> tr[k]
+                    df<span style="color: #333333">.</span>loc[j<span style="color: #333333">-</span>ws:j<span style="color: #333333">+</span>ws,<span style="background-color: #fff0f0">&#39;# trans_label&#39;</span>]<span style="color: #333333">=</span><span style="color: #0000DD; font-weight: bold">1</span>
+                R1<span style="color: #333333">.</span>append(df)
+            <span style="color: #008800; font-weight: bold">return</span> R1
+        </pre></div>
+        
           
           
           <hr />
