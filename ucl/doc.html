@@ -86,6 +86,41 @@
           <p>Lorem ipsum dolor sit amet, scripta tibique indoctum sit ei, mel inani aeterno ad. Facer oratio ex per. At eam movet verear, in sea brute patrioque disputando, usu nonumes torquatos an. Ex his quaerendum intellegebat, ut vel homero accusam. Eum at debet tibique, in vocibus temporibus adversarium sed. Porro verear eu vix, ne usu tation vituperata.</p>
           <p>Malis percipitur an pro. Pro aperiam persequeris at, at sonet sensibus mei, id mea postulant definiebas concludaturque. Id qui malis abhorreant, mazim melius quo et. At eam altera dolorum, case dicant lobortis ius te, ad vel affert oportere reprehendunt. Quo no verterem deseruisse, mea brute postea te, ne per tacimates suavitate vituperatoribus.</p>
           <p>Malis percipitur an pro. Pro aperiam persequeris at, at sonet sensibus mei, id mea postulant definiebas concludaturque. Id qui malis abhorreant, mazim melius quo et. At eam altera dolorum, case dicant lobortis ius te, ad vel affert oportere reprehendunt. Quo no verterem deseruisse, mea brute postea te, ne per tacimates suavitate vituperatoribus.</p>
+          
+          <div class="code__block code__block--notabs">
+            <pre class="code code--block">
+              <code>
+                def read_data(P_Id=None,ws = None,r=None):
+                """
+                This method takes patient ids widow size of transitions and recording number
+                """
+                progress = progressbar.ProgressBar()
+            
+                R1=[] 
+                for pid in progress(P_Id):
+                    df = pd.read_csv(f"../data/Patient-{pid}/Sensor-731_{r}.csv")
+                    df2 = pd.read_csv(f"../data/Patient-{pid}/Sensor-749_{r}.csv")
+                        #for val in df2.columns:
+            
+                    df = df.join(df2,rsuffix='_right')
+                    #print(df.head())
+                    #df = pd.read_csv(f"../nbs/Patient-{pid}/Sensor-731_1.csv")
+                    df2 = pd.read_csv(f"../data/Patient-{pid}-label/label_rec_{r}.csv")
+                    df = df.join(df2)
+                    
+                    tr=df.loc[df[list(df.columns)[-1]] == 1].index
+                    # 30 seconds of transition  Lie Flat and sit ups--- Head movements
+                    p=0
+                    for k in range(0,len(tr),5):
+                        j = tr[k]
+                        df.loc[j-ws:j+ws,'# trans_label']=1
+                    R1.append(df)
+                return R1
+              </code>
+            </pre>
+          </div>
+          
+          
           <hr />
         </section>
 
